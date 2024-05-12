@@ -1,0 +1,27 @@
+ /* Estilo para el contenedor del formulario */
+ .container {
+    margin-top: 20px; /* Separación de la parte superior */
+    padding: 20px; /* Espaciado interno del contenedor */
+    border-radius: 10px; /* Borde redondeado */
+    width: 100%; /* Ancho del contenedor */
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.centre-tittle {
+    text-align: center;
+}
+
+/* Estilo para el formulario */
+form {
+    border: 1px solid #ccc; /* Borde del formulario */
+    padding: 20px; /* Espaciado interno del formulario */
+    border-radius: 10px; /* Borde redondeado */
+}
+
+.centrar-botones {
+    display: flex;
+    justify-content: flex-end; /* Cambia "center" a "flex-end" para alinear a la derecha */
+    align-items: center;
+    margin: 30px;
+}

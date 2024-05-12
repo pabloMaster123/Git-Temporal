@@ -1,0 +1,68 @@
+
+.sidebar {
+    background-color: #1b212cff;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+/* Estilos por defecto para los enlaces en la barra lateral */
+.sidebar-link {
+    color: white;           /* Texto en blanco por defecto */
+    text-decoration: none;  /* Sin subrayado por defecto */
+}
+
+.bottom-link{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #fff; /* Cambia el color de texto según tus preferencias */
+    text-align: center;
+    padding: 10px;
+}
+
+/* Estilos para los enlaces activos (cuando se hace clic) */
+.sidebar-link.active-link {
+    text-decoration: underline; /* Subrayado al hacer clic */
+}
+
+/* Agregar ">" al enlace activo */
+.sidebar-link.active-link::before {
+    content: "> ";
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  
+  #Docker:hover{
+    text-decoration: underline; /* Subrayado al hacer clic */
+  }
+  
+  .dropdown-options {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    background-color: #1b212cff;
+    border-radius:5px;
+    box-shadow: 0px 0px 0px 0px rgb(255, 255, 255);
+  }
+  
+  .dropdown:hover .dropdown-options {
+    display: contents;
+  }
+  
+  .dropdown-options a {
+    display: block;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+    padding: 20px;
+  }
+  
+  .dropdown-options a:hover {
+    color: white;
+    border-radius:5px;
+  }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Desktop Cloud Uniquindio</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/styleMainPage.css">
+    <link rel="stylesheet" type="text/css" href="/static/styleNavbar.css">
+</head>
+
+<body style="background-color: #d9d9d9ff; height: 100vh;">
+    <div class="navbar" style="height: 20vh;">
+        <ul>
+            <li><img src="/static/images/logo.jpg" class="img-bar" ></li>
+            <li><a href="mainPage" class="custom-link">Desktop Cloud UQ</a></li>
+        </ul>
+        <ul>
+            <li class="navbar-right"><a>{{.email}}</a></li>
+            <li class="navbar-right">
+                <button class="logout-button" onclick="window.location.href='/logout'">Cerrar sesión</button>
+            </li>
+        </ul>
+        
+    </div>
+    <div class="container-page" style="height: 80vh;">
+        <iframe src="scrollmenu" frameborder="0" scrolling="no" width="20%"></iframe>
+        <iframe id="mainPageContent" src="controlMachine" scrolling="auto" width="80%"></iframe>
+    </div>
+    <script>
+        function cambiarContenido(contenido) {
+            const inframeMainPageContent = document.getElementById("mainPageContent");
+            inframeMainPageContent.src = contenido;
+        }
+
+
+        // Obtén una referencia al iframe
+        var inframe = document.getElementById("mainPageContent");
+
+        // Espera a que el contenido del iframe esté completamente cargado
+        inframe.addEventListener("load", function () {
+            // Accede al elemento con el id "input" dentro del iframe
+            var inputElement = inframe.contentDocument.getElementById("input");
+
+            if (inputElement) {
+                // Configura el atributo "inputmode" del elemento dentro del iframe
+                inputElement.setAttribute("inputmode", "tel");
+            } else {
+                alet("No se encontró un elemento con el id 'input' dentro del iframe.");
+            }
+        });
+    </script>
+</body>
+
+</html>

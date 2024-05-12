@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        text-align: center;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .container div {
+
+        margin: 10px;
+        padding: 10px 10px 20px 10px;
+        /* Agrega un espacio interno de 20px en la parte inferior */
+        text-align: center;
+    }
+
+
+    h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 10px;
+        height: 25px;
+    }
+
+    .file-icon {
+        width: 125px;
+        margin: 10px;
+    }
+
+    figcaption {
+        display: block;
+    }
+
+    figure {
+        text-align: center;
+    }
+</style>
+
+
+<body style="background-color: #d9d9d9ff;">
+    <div class="container" style="margin-top: 20px;">
+        <div>
+            <h5>Guía Laboratorio</h5>
+            <a href="/static/Laboratorio.pdf" download="Laboratorio.pdf">
+                <figure>
+                    <img class="file-icon" src="/static/images/pdf-icon.png" alt="PDF Icon">
+                    <figcaption>Descargar Guía</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div>
+            <h5>¿Cómo crear máquinas?</h5>
+            <iframe src="https://www.youtube.com/embed/B1mbJzULvlg" frameborder="0" allowfullscreen></iframe>
+        </div>        
+    </div>
+    <div class="container" style="margin-top: 20px;">
+        <div>
+            <h5>¿Cómo me conecto a una màquina?</h5>
+            <iframe src="https://www.youtube.com/embed/cY3GZuLMA8U" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div>
+            <h5>¿Cómo registrarme?</h5>
+            <iframe src="https://www.youtube.com/embed/LKwU_rCD2dY" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</body>
+
+
+</html>

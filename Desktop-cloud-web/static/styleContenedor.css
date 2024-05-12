@@ -1,0 +1,91 @@
+.button-container {
+    display: flex;
+    flex-direction: column; /* Cambiamos la dirección a columna */
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.button-label {
+    display: flex;
+    align-items: center; /* Alineamos los elementos en el centro */
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: gray;
+    color: white;
+}
+
+.selected {
+    background-color: blue;
+}
+
+.label {
+    margin-left: 10px; /* Espacio entre el botón y la etiqueta */
+}
+
+.conetendores{
+    padding-top: 30px;
+}
+
+.form-group{
+    padding-top: 30px;
+}
+
+.table-container {
+    max-height: 300px; /* Altura máxima que desees */
+    overflow-y: auto; /* Hace que el contenido sea scrollable verticalmente */
+    border: 1px solid #000000; /* Agrega un borde al contenedor */
+}
+
+table {
+    padding-top: 40px;
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: separate;
+    border-spacing: 0; /* Elimina el espaciado entre las celdas */
+}
+
+th, td {
+    padding: 8px; /* Añade espacio interno en las celdas según tu preferencia */
+    border-radius: 0; /* Elimina el redondeo de las esquinas de las celdas */
+    border: 1px solid #000000; /* Agrega un borde a las celdas */
+}
+
+form {
+    border: 1px solid #ccc; /* Borde del formulario */
+    padding: 20px; /* Espaciado interno del formulario */
+    border-radius: 10px; /* Borde redondeado */
+}
+
+.centrar-botones {
+    display: flex;
+    justify-content: center; /* Cambia "center" a "flex-end" para alinear a la derecha */
+    align-items: center;
+}
+
+.centre-tittle{
+    text-align: center;
+}
+
+ /* Estilo para el contenedor del formulario */
+ .container {
+    margin-top: 20px; /* Separación de la parte superior */
+    padding: 20px; /* Espaciado interno del contenedor */
+    border-radius: 10px; /* Borde redondeado */
+    width: 100%; /* Ancho del contenedor */
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.configuracion_contenedor{
+    padding: auto;
+    border-radius: 20px;
+    border: 1px solid #000000; /* Agrega un borde a las celdas */
+}

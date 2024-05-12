@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Monitoreo Desktop Cloud Uniquindìo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .chart-row {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            width: 50%;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Centro de Monitoreo del Desktop Cloud</h1>
+
+        <div class="chart-row">
+            <div class="chart-container">
+                <canvas id="machinesChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="registeredUsersChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-row">
+            <div class="chart-container">
+                <canvas id="totalCpuChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="totalRamChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var datosDashboard = JSON.parse('{{ .datosDashboard | json }}');
+        var total_maquinas_creadas = datosDashboard.Total_maquinas_creadas;
+        var total_maquinas_encendidas = datosDashboard.Total_maquinas_encendidas;
+        var total_usuarios = datosDashboard.Total_usuarios;
+        var total_estudiantes = datosDashboard.Total_estudiantes;
+        var total_invitados = datosDashboard.Total_invitados;
+        var total_RAM = datosDashboard.Total_RAM
+        var total_RAM_usada = datosDashboard.Total_RAM_usada;
+        var total_CPU = datosDashboard.Total_CPU;
+        var total_CPU_usada = datosDashboard.Total_CPU_usada;
+
+        var colors = ['rgba(0, 0, 139, 0.2)', 'rgba(139, 0, 0, 0.2)'];
+        var ctx1 = document.getElementById('machinesChart').getContext('2d');
+        var mtotalMachinesChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Total Máquinas Virtuales Creadas', 'Total Máquinas Virtuales Encendidas'],
+                datasets: [{
+                    label: 'Total Máquinas Virtuales Creadas',
+                    data: [total_maquinas_creadas, total_maquinas_encendidas],
+                    backgroundColor: colors,
+                    borderColor: colors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Máquinas Virtuales'
+                }
+            }
+        });
+
+        var ctx2 = document.getElementById('registeredUsersChart').getContext('2d');
+
+        // Definir colores para cada barra
+        var colors = ['rgba(139, 0, 0, 0.2)', 'rgba(0, 0, 139, 0.2)', 'rgba(0, 100, 0, 0.2)'];
+        var registeredUsersChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Total Usuarios Registrados', 'Total Estudiantes', 'Total Invitados'],
+                datasets: [{
+                    label: 'Usuarios Registrados',
+                    data: [total_usuarios, total_estudiantes, total_invitados],
+                    backgroundColor: colors, // Usa el array de colores para asignar colores a las barras
+                    borderColor: colors, 
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Usuarios'
+                }
+            }
+        });
+
+        // Gráfico de CPU
+        var cpuColors = ['rgba(0, 0, 128, 0.6)', 'rgba(139, 0, 0, 0.6)'];
+        var ctx3 = document.getElementById('totalCpuChart').getContext('2d');
+        var totalCpuChart = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['CPU Disponible', 'CPU Usada'],
+                datasets: [{
+                    data: [total_CPU, total_CPU_usada],
+                    backgroundColor: cpuColors,
+                    borderColor: cpuColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                cutoutPercentage: 70,
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var value = dataset.data[tooltipItem.index];
+                            var label = data.labels[tooltipItem.index];
+                            return label + ': ' + value + ' Nùcleos';
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'CPU'
+                }
+            }
+        });
+
+        // Gráfico de RAM
+        var ramColors = ['rgba(0, 100, 0, 0.6)', 'rgba(85, 26, 139, 0.6)'];
+        var ctx4 = document.getElementById('totalRamChart').getContext('2d');
+        var totalRamChart = new Chart(ctx4, {
+            type: 'doughnut',
+            data: {
+                labels: ['RAM Disponible', 'RAM Usada'],
+                datasets: [{
+                    data: [total_RAM, total_RAM_usada],
+                    backgroundColor: ramColors,
+                    borderColor: ramColors,
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                cutoutPercentage: 70,
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var value = dataset.data[tooltipItem.index];
+                            var label = data.labels[tooltipItem.index];
+                            return label + ': ' + value + ' GB';
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Memoria RAM'
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

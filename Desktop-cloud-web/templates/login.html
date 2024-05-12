@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <style>
+        .center-content {
+            display: flex;
+            flex-direction: row;
+            /* Ahora es una columna para poner las imágenes una debajo de la otra */
+            align-items: center;
+            text-align: center;
+            /* Para centrar el contenido */
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            /* Ajusta el espacio según sea necesario */
+
+        }
+
+        .image-container {
+            display: block;
+            justify-content: space-between;
+            /* Para que las imágenes estén una al lado de la otra */
+            align-items: center;
+        }
+
+        .icon-image,
+        .grid-image {
+            margin-right: 20px;
+            /* Ajusta el margen entre las imágenes */
+        }
+
+        .login-container,
+        .guest-login-container {
+            margin: 50px;
+            width: 400px;
+        }
+
+        .guest-login-container {
+            text-align: center;
+            height: 380px;
+            display: grid;
+        }
+
+        .guest-login-form {
+            display: grid;
+            align-items: center;
+        }
+
+        #guest-login-btn {
+    
+            margin-top: 85px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <div class="image-container">
+            <img class="icon-image" style="width: 70px;" src="/static/images/icon.png">
+            <img class="grid-image" style="width: 150px;" src="/static/images/grid.png">
+        </div>        
+        
+    </div>
+    <div style="text-align: center;">
+        <h1 style="margin-left: 5%;">Desktop Cloud Uniquindío</h1>        
+    </div>
+
+    <div class="container">
+        <div class="center-content">
+            <div class="login-container">
+                <form method="post" action="/login">
+                    <h2 class="centre-tittle">Iniciar sesión</h2>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="centrar-botones">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 30px; width: 120px;">Iniciar
+                            sesión</button>
+                        <a href="/signin" class="btn btn-primary" style="width: 120px;">Registrarse</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="guest-login-container">
+                <form id="guest-login-form" class="guest-login-form">
+                    <h2 class="centre-tittle">Entrar como invitado</h2>
+                    <div class="form-group">
+                        <label for="osCreate" style="margin: 5px;">Distribución para tu máquina:</label>
+                        <select class="form-control" id="osCreate" name="osCreate" required>
+                            <option value="Debian">Debian</option>
+                            <option value="Mint">Linux Mint</option>
+                            <option value="Ubuntu">Ubuntu</option>
+                        </select>
+                        <button type="button" class="btn btn-success" id="guest-login-btn">Entrar como invitado</button>
+                    </div>
+                </form>
+                <!-- Agrega aquí otras opciones según sea necesario -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#guest-login-btn").on("click", function () {
+                // Obtener el valor seleccionado del campo "osCreate"
+                var distribucion = $("#osCreate").val();
+    
+                $.ajax({
+                    type: "POST",
+                    url: "/api/loginTemp",
+                    data: { osCreate: distribucion }, // Incluir el valor en los datos de la solicitud
+                    success: function (response) {
+                        console.log("Inicio de sesión como invitado exitoso");
+                        window.location.href = "/mainPage";
+                    },
+                    error: function (error) {
+                        console.error("Error al iniciar sesión como invitado", error);
+                    }
+                });
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

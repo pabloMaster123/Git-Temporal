@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+    <style>
+        .center-content {
+            display: flex;
+            flex-direction: row;
+            /* Ahora es una columna para poner las imágenes una debajo de la otra */
+            align-items: center;
+            text-align: center;
+            /* Para centrar el contenido */
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            /* Ajusta el espacio según sea necesario */
+
+        }
+
+        .image-container {
+            display: block;
+            justify-content: space-between;
+            /* Para que las imágenes estén una al lado de la otra */
+            align-items: center;
+            align-self: stretch;
+        }
+
+        .icon-image,
+        .grid-image {
+            margin-right: 20px;
+            /* Ajusta el margen entre las imágenes */
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="header-container">
+        <div class="image-container">
+            <img class="icon-image" style="width: 70px;" src="/static/images/icon.png">
+            <img class="grid-image" style="width: 150px;" src="/static/images/grid.png">
+        </div>        
+        
+   
+        <div class="center-content">
+            <form method="post" action="/signin" style="width: 400px;">
+                <h2 class="centre-tittle">Registro</h2>
+                <div class="form-group" >
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electronico:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="centrar-botones">
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+                </div>
+                <div class="text-center">
+                    ¿Ya tienes una cuenta?
+                </br>
+                    <a href="/login">Inicia sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Div para la alerta centrada -->
+        <div id="alert-container">
+            <div id="alert-message" class="alert" role="alert">
+        </div>
+    </div>
+
+    <script>
+        function showAlert(message, alertType) {
+            var alertBox = document.getElementById("alert-message");
+            alertBox.innerText = message;
+            alertBox.className = "alert alert-" + alertType;
+            var alertContainer = document.getElementById("alert-container");
+            alertContainer.style.display = "block";
+    
+            // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function () {
+                alertContainer.style.display = "none";
+            }, 5000);
+        }
+    
+        var successMessage = "{{ .SuccessMessage }}";
+        if (successMessage !== "") {
+            showAlert(successMessage, "success");
+        }
+    
+        var errorMessage = "{{ .ErrorMessage }}";
+        if (errorMessage !== "") {
+            showAlert(errorMessage, "danger");
+        }
+    </script>    
+
+</body>
+</html>

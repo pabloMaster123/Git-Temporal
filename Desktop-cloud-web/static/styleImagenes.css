@@ -1,0 +1,57 @@
+.form-group{
+    padding-top: 30px;
+}
+
+.table-container {
+    max-height: 300px; /* Altura máxima que desees */
+    overflow-y: auto; /* Hace que el contenido sea scrollable verticalmente */
+    border: 1px solid #000000; /* Agrega un borde al contenedor */
+}
+
+table {
+    padding-top: 40px;
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: separate;
+    border-spacing: 0; /* Elimina el espaciado entre las celdas */
+}
+
+th, td {
+    padding: 8px; /* Añade espacio interno en las celdas según tu preferencia */
+    border-radius: 0; /* Elimina el redondeo de las esquinas de las celdas */
+    border: 1px solid #ccc; /* Agrega un borde a las celdas */
+}
+
+form {
+    border: 1px solid #ccc; /* Borde del formulario */
+    padding: 20px; /* Espaciado interno del formulario */
+    border-radius: 10px; /* Borde redondeado */
+}
+
+.centrar-botones {
+    display: flex;
+    justify-content: center; /* Cambia "center" a "flex-end" para alinear a la derecha */
+    align-items: center;
+}
+
+.centre-tittle{
+    text-align: center;
+}
+
+ /* Estilo para el contenedor del formulario */
+ .container {
+    margin-top: 20px; /* Separación de la parte superior */
+    padding: 20px; /* Espaciado interno del contenedor */
+    border-radius: 10px; /* Borde redondeado */
+    width: 100%; /* Ancho del contenedor */
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.contenedor{
+    margin-top: 30px;
+    border: 1px solid #000000;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    background-color: #ccc;
+}
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gestion Contenedores</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/scriptjs/controleContenedorScripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styleNavbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/styleContenedor.css">
+</head>
+
+<style>
+    /* Estilo para el contenedor de configuración */
+    #configuracion_contenedor.visible {
+        border: 1px solid black;
+        /* Borde azul de 2px */
+        padding: 20px;
+        /* Agrega un poco de espacio alrededor del contenido */
+    }
+</style>
+
+<body style="height: 100vh;">
+    <div style="height: 80vh;">
+        <div class="container">
+            <div class="center-content" style="margin: 100px; width: 240vh;border-radius: 20px;border: 1px solid #ccc;">
+
+                <h2 class="centre-tittle" style="margin-top: 50px;margin-left: 50px;">Gestion de contenedor</h2>
+
+                <div class="form-group" style="margin-left: 150px; ">
+
+                <div id="contenedor" style="width: 800px;margin-top: 5%;margin-bottom: 10px">
+                    <form id="mainForm" method="post" action="/crearContenedor">
+
+                        <h4 class="centre-tittle" style="margin-top: 50px;">Crear Contenedores</h4>
+                        <div style="display: flex;">
+
+                            <div style="width: 1000px; margin-right: auto;">
+
+                                <div class="form-group" style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                    <label for="maquina_virtuales">IP Maquina Virtual</label>
+                                    <select class="form-control" style="width: 400px;" id="maquinaVirtual"
+                                        name="maquinaVirtual">
+                                        <option value="0" disabled selected> Selecione Su Maquina Virtual</option>
+                                        {{range .machines}}
+                                        <option>{{.Ip}} - {{.Hostname}}</option>
+                                        {{end}}
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                    <label for="rutaDisk">Nombre Imagen a usar:</label>
+                                    <input type="text" class="form-control" style="width: 400px;" id="nombreImagen"
+                                        name="nombreImagen" required>
+                                </div>
+
+                                <div class="centrar-botones">
+                                    <button type="submit" class="btn btn-primary"
+                                        style="margin-top: 30px;margin-bottom: 30px; width: 120px;">
+                                        Enviar
+                                    </button>
+                                </div>
+
+                                <!--
+                    <div id="configuracion_contenedor" style="width: 1000px;border-radius: 20px;border: 1px solid #ccc;margin-top: 5%;margin-bottom: 10px;margin-left: 100px;">
+                        
+                        <div class="container" style="display: flex; align-items: stretch;">
+
+                                <div id="conetendores" style="width: 500px; margin-right: 100px; margin-top: 100px;">
+    
+                                    <div class="button-label">
+                                        <button id="button1" class="button" type="button" onclick="toggleSelection(1)"></button>
+                                        <label class="label" for="button1">--deatch</label>
+                                    </div>
+                                    <div class="button-label">
+                                        <button id="button2" class="button" type="button" onclick="toggleSelection(2)"></button>
+                                        <label class="label" for="button2">--interactive</label>
+                                    </div>
+                                    <div class="button-label">
+                                        <button id="button3" class="button" type="button" onclick="toggleSelection(3)"></button>
+                                        <label class="label" for="button3">--remove</label>
+                                    </div>
+        
+                                </div>
+
+                                <div id="conetendores" style="width: 500px; margin-left: 50px;">
+                                    <div class="form-group">
+                                        <label for="hostnameHost">--name:</label>
+                                        <input type="text" class="form-control" id="name" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ramHost">--port:</label>
+                                        <input type="number" class="form-control" id="port" name="port">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cpuHost">--volume</label>
+                                        <input type="number" class="form-control" id="volume" name="volume">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="almaceHost">--memory:</label>
+                                        <input type="number" class="form-control" id="memory" name="memory">
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        <div id="campoTexto" class="form-group" style="width: 800px;align-items: stretch;margin-left: 10%;">
+                            <input type="text" class="form-control" id="campoTexto">
+                        </div>
+
+                    </div> -->
+
+                                <div class="form-group" style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                    <label for="respuestaServer">Respuesta Servidor:</label>
+                                    <input type="text" class="form-control" style="width: 400px;height: 100px;"
+                                        id="respuesta" name="respuesta" value="{{ .mensaje }}" readonly>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+
+
+                <div id="BuscarContenedores" style="width: 800px;margin-top: 5%;margin-bottom: 10px">
+                    <form action="/api/contendores" method="post" style="width: 800px;margin-top: 50px;">
+
+                        <h4 class="centre-tittle">Buscar Contenedores</h4>
+                        <div style="display: flex;">
+
+                            <div style="width: 1000px; margin-right: auto;">
+
+                                <div class="form-group" style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                    <label for="maquina_virtuales">IP Maquina Virtual</label>
+                                    <select class="form-control" style="width: 400px;" id="buscarMV"
+                                        name="buscarMV">
+                                        <option value="0" disabled selected> Selecione Su Maquina Virtual</option>
+                                        {{range .machines}}
+                                        <option>{{.Ip}} - {{.Hostname}}</option>
+                                        {{end}}
+                                    </select>
+                                </div>
+
+                                <div class="centrar-botones">
+                                    <button type="submit" class="btn btn-primary"
+                                        style="margin-top: 30px;margin-bottom: 30px; width: 120px;">
+                                        Enviar
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                </div>
+
+                <div class="table" style="width: 1000px;margin-left: 50px;">
+                    <table id="machine-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
+                                <th>Status</th>
+                                <th>Control</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        function showDiv(select) {
+            if (select.value == 0) {
+
+                document.getElementById('configuracion_contenedor').style.display = "none";
+
+
+            } else {
+
+                document.getElementById('configuracion_contenedor').style.display = "block";
+
+            }
+        }
+
+        var selectedButtons = [];
+
+        function toggleSelection(buttonNumber) {
+            var buttonIndex = selectedButtons.indexOf(buttonNumber);
+
+            if (buttonIndex === -1) {
+                // Si el botón no está seleccionado, lo añadimos al array
+                selectedButtons.push(buttonNumber);
+                document.getElementById('button' + buttonNumber).classList.add('selected');
+            } else {
+                // Si el botón ya está seleccionado, lo eliminamos del array
+                selectedButtons.splice(buttonIndex, 1);
+                document.getElementById('button' + buttonNumber).classList.remove('selected');
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

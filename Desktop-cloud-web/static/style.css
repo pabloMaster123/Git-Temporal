@@ -1,0 +1,167 @@
+/* Estilo para el contenedor principal */
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+/* Estilo para el contenedor de contenido centrado */
+.center-content {
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente en el contenedor de contenido */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Estilos para la ventana emergente */
+.ventana-emergente {
+    display: none; /* Inicialmente oculta la ventana emergente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Asegura que la ventana emergente esté por encima de otros elementos */
+    max-width: 400px;
+}
+
+/* Estilo para el botón de cerrar */
+.ventana-emergente button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+}
+
+label {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a {
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+b {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.centrar-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+}
+
+/* Estilos para el botón */
+.button {
+    margin-top: 30px; /* Espacio encima del botón */
+}
+
+.button-column {
+    white-space: nowrap;
+    display: flex;
+}
+
+.button-column button {
+    margin-right: 5px;
+}
+/* Estilo para el formulario */
+form {
+    border: 1px solid #ccc; /* Borde del formulario */
+    padding: 20px; /* Espaciado interno del formulario */
+    border-radius: 10px; /* Borde redondeado */
+}
+
+/* Estilo para la imagen a la derecha */
+.image-container {
+    float: right; /* Posiciona a la derecha */
+    width: 30%; /* Ancho de la imagen */
+}
+
+.centre-tittle {
+    text-align: center;
+}
+
+.container-page {
+    display: flex; /* Utiliza el modelo de caja flexible para distribuir el espacio verticalmente */
+    height: 100vh; /* Establece la altura de la div al 100% del alto de la ventana del navegador */
+}
+
+iframe {
+    height: 100%; /* Establece la altura de los iframes al 100% del contenedor padre (.container-page) */
+}
+
+/* Estilo para el contenido principal */
+.content {
+    margin: 30px;
+}
+
+/* Estilos para el contenido principal */
+.content {
+    padding: 20px;
+}
+
+h1, p {
+    color: #333;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px; /* Ajusta el valor según tu preferencia */
+}
+th, td {
+    padding: 10px; /* Añade espacio interno en las celdas según tu preferencia */
+}
+
+.estado-apagado {
+    color: #e06666ff;
+}
+.estado-encendido {
+    color: #93c47dff;
+}
+
+#alert-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 9999;
+}
+
+#alert-message {
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .grid-image {
+    align-self: center;
+    margin-top: 20px;
+  }
+  
+  .icon-image {
+    align-self: center;
+  }
+   
+  
+
+

@@ -1,0 +1,75 @@
+/* Estilo para el contenido principal */
+.content {
+    margin: 30px;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.table-container {
+    max-height: 300px; /* Altura máxima que desees */
+    overflow-y: auto; /* Hace que el contenido sea scrollable verticalmente */
+    border: 1px solid #000000; /* Agrega un borde al contenedor */
+}
+
+table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: separate;
+    border-spacing: 0; /* Elimina el espaciado entre las celdas */
+}
+
+th, td {
+    padding: 8px; /* Añade espacio interno en las celdas según tu preferencia */
+    border-radius: 0; /* Elimina el redondeo de las esquinas de las celdas */
+    border: 1px solid #000000; /* Agrega un borde a las celdas */
+}
+
+
+/* Estilos para la ventana emergente */
+.ventana-emergente {
+    display: none; /* Inicialmente oculta la ventana emergente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Asegura que la ventana emergente esté por encima de otros elementos */
+    max-width: 500px;
+}
+
+/* Estilo para el botón de cerrar */
+.ventana-emergente button {
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+}
+
+/* Estilo para el formulario */
+form {
+    border: 1px solid #ccc; /* Borde del formulario */
+    padding: 20px; /* Espaciado interno del formulario */
+    border-radius: 10px; /* Borde redondeado */
+}
+
+.centrar-botones {
+    display: flex;
+    justify-content: center; /* Cambia "center" a "flex-end" para alinear a la derecha */
+    align-items: center;
+}
+
+.centre-tittle{
+    text-align: center;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Agregar Disco</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+        <link rel="stylesheet" type="text/css" href="/static/styleNavbar.css">
+
+</head>
+
+<body style="height: 100vh;">
+    <div style="height: 80vh;">
+        <div class="container">
+            <div class="center-content">
+                <form method="post" action="/createDisk" style="margin: 50px; width: 120vh;">
+                    <h2 class="centre-tittle">Agregar Disco</h2>
+                    <div style="display: flex;">
+                        <div style="width: 1000px; margin-right: 10px;">
+                            <div class="form-group">
+                                <label for="nameDisk">Nombre del Disco</label>
+                                <select class="form-control" id="nameDisk" name="nameDisk" required>
+                                    <option value="Debian">Debian</option>
+                                    <option value="Mint">Linux Mint</option>
+                                    <option value="Ubuntu">Ubuntu</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rutaDisk">Ruta del Disco:</label>
+                                <input type="text" class="form-control" id="rutaDisk" name="rutaDisk" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="osDisk">Sistema Operativo</label>
+                                <select class="form-control" id="osDisk" name="osDisk" required onchange="actualizarDistribuciones()">
+                                    <option value="Windows">Windows</option>
+                                    <option value="Linux">Linux</option>
+                                    <option value="Mac">Mac</option>
+                                </select>
+                            </div>
+                      </div> 
+                      <div style="width: 1100px; margin-left: 10px;">
+                        <div class="form-group">
+                            <label for="distriDisk">Distribución del Sistema Operativo</label>
+                            <select class="form-control" id="distriDisk" name="distriDisk" required>
+                                <!-- Las opciones se actualizarán dinámicamente con JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="arquiDisk">Arquitectura</label>
+                            <select class="form-control" id="arquiDisk" name="arquiDisk" required>
+                                <option value="64">64</option>
+                                <option value="32">32</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="idHostDisk">Asociar al Host:</label>
+                            <select class="form-control" id="idHostDisk" name="idHostDisk" required>
+                                {{range .hosts}}
+                                    <option value="{{.Id}}">Id: {{.Id}}, Nombre: {{.Nombre}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+                      </div>   
+                    </div>
+                    <div class="centrar-botones">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 30px; width: 120px;">Crear Host</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function actualizarDistribuciones() {
+            var osSelect = document.getElementById("osDisk");
+            var distriSelect = document.getElementById("distriDisk");
+    
+            // Limpiar las opciones actuales
+            distriSelect.innerHTML = "";
+    
+            // Obtener el valor seleccionado en el primer select
+            var selectedOs = osSelect.options[osSelect.selectedIndex].value;
+    
+            // Agregar nuevas opciones al segundo select basado en la selección del primero
+            if (selectedOs === "Linux") {
+                var distriOptions = ["Debian", "Linux Mint", "Ubuntu"];
+                for (var i = 0; i < distriOptions.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = distriOptions[i];
+                    option.value = distriOptions[i];
+                    distriSelect.add(option);
+                }
+            } else {
+                // Agregar otras opciones según sea necesario para otros sistemas operativos
+                // Por ejemplo, para Windows y Mac
+            }
+        }
+    
+        // Llamar a la función al cargar la página para asegurarse de que las opciones iniciales estén configuradas correctamente
+        actualizarDistribuciones();
+    </script>    
+</body>
+</html>

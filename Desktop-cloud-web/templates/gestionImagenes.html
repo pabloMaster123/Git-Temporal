@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gestion Imagenes</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/scriptjs/controleImagenScripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styleNavbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/styleImagenes.css">
+</head>
+
+<body style="height: 100vh;">
+    <div style="height: 80vh;">
+        <div class="container">
+            <div class="center-content" style="margin: 100px; width: 240vh;border-radius: 20px;border: 1px solid #ccc;">
+
+                <h2 class="centre-tittle" style="margin-top: 50px;margin-left: 50px;">Gestion Imagenes</h2>
+
+                <div class="form-group" style="margin-left: 150px; ">
+
+                    <label for="origen_imagen">Origen Imagen</label>
+
+                    <select class="form-control" style="width: 800px;" id="origenImagen" name="origenImagen"
+                        onchange="showDiv(this)">
+                        <option value="0" disabled selected> Selecione Origen de la Imagen </option>
+                        <option value="1"> DockerHub </option>
+                        <option value="2"> Archivo .Tar </option>
+                        <option value="3"> Docker File </option>
+                    </select>
+
+                    <div id="DockerHub" style="display: none;width: 800px;margin-top: 5%;margin-bottom: 10px">
+                        <form id="mainForm" method="post" action="/DockerHub">
+
+                            <h4 class="centre-tittle" style="margin-top: 50px;">Crear imagenes con Docker Hub</h4>
+                            <div style="display: flex;">
+
+                                <div style="width: 1000px; margin-right: auto;">
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="maquina_virtuales">IP Maquina Virtual</label>
+                                        <select class="form-control" style="width: 400px;" id="maquinaVirtual"
+                                            name="maquinaVirtual">
+                                            <option value="0" disabled selected> Selecione Su Maquina Virtual</option>
+                                            {{range .machines}}
+                                            <option>{{.Ip}} - {{.Hostname}}</option>
+                                            {{end}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="rutaDisk">Nombre Imagen:</label>
+                                        <input type="text" class="form-control" style="width: 400px;" id="nombreImagen"
+                                            name="nombreImagen" required>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px; margin-top: 30px;margin-bottom: 30px">
+                                        <label for="rutaDisk">Version Imagen:</label>
+                                        <input type="text" class="form-control" style="width: 400px;" id="versionImagen"
+                                            name="versionImagen">
+                                    </div>
+
+                                    <div class="centrar-botones">
+                                        <button type="submit" class="btn btn-primary"
+                                            style="margin-top: 30px;margin-bottom: 30px; width: 120px;">
+                                            Enviar
+                                        </button>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="respuestaServer">Respuesta Servidor:</label>
+                                        <input type="text" class="form-control" style="width: 400px;height: 100px;"
+                                            id="respuesta" name="respuesta" value="{{ .mensaje }}" readonly>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div id="archivoTar" style="display: none;width: 800px;margin-top: 5%;margin-bottom: 10px">
+                        <form id="mainForm" method="post" action="/CrearImagenTar" enctype="multipart/form-data">
+
+                            <h4 class="centre-tittle" style="margin-top: 50px;">Crear imagenes con archivos .Tar</h4>
+                            <div style="display: flex;">
+
+                                <div style="width: 1000px; margin-right: auto;">
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="maquina_virtuales">IP Maquina Virtual</label>
+                                        <select class="form-control" style="width: 400px;" id="maquinaVirtual"
+                                            name="maquinaVirtual">
+                                            <option value="0" disabled selected> Selecione Su Maquina Virtual</option>
+                                            {{range .machines}}
+                                            <option>{{.Ip}} - {{.Hostname}}</option>
+                                            {{end}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="rutaDisk">Nombre Imagen:</label>
+                                        <input type="text" class="form-control" style="width: 400px;" id="nombreImagen"
+                                            name="nombreImagen" required>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px; margin-top: 30px;margin-bottom: 30px">
+                                        <label for="rutaDisk">Archivo a enviar:</label>
+                                        <input type="file" class="form-control" style="width: 400px;" id="archivo"
+                                            name="archivo" required>
+                                    </div>
+
+                                    <div class="centrar-botones">
+                                        <button type="submit" class="btn btn-primary"
+                                            style="margin-top: 30px;margin-bottom: 30px; width: 120px;">
+                                            Enviar
+                                        </button>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="respuestaServer">Respuesta Servidor:</label>
+                                        <input type="text" class="form-control" style="width: 400px;height: 100px;"
+                                            id="respuesta" name="respuesta" value="{{ .mensaje }}" readonly>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <div id="DockerFile" style="display: none;width: 800px;margin-top: 5%;margin-bottom: 10px">
+                        <form id="mainForm" method="post" action="/CrearDockerFile" enctype="multipart/form-data">
+
+                            <h4 class="centre-tittle" style="margin-top: 50px;">Crear imagenes con archivos Docker File</h4>
+                            <div style="display: flex;">
+
+                                <div style="width: 1000px; margin-right: auto;">
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="maquina_virtuales">IP Maquina Virtual</label>
+                                        <select class="form-control" style="width: 400px;" id="maquinaVirtual"
+                                            name="maquinaVirtual">
+                                            <option value="0" disabled selected> Selecione Su Maquina Virtual</option>
+                                            {{range .machines}}
+                                            <option>{{.Ip}} - {{.Hostname}}</option>
+                                            {{end}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="rutaDisk">Nombre Imagen:</label>
+                                        <input type="text" class="form-control" style="width: 400px;" id="nombreImagen"
+                                            name="nombreImagen" required>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px; margin-top: 30px;margin-bottom: 30px">
+                                        <label for="rutaDisk">Archivo a enviar:</label>
+                                        <input type="file" class="form-control" style="width: 400px;" id="archivo"
+                                            name="archivo" required>
+                                    </div>
+
+                                    <div class="centrar-botones">
+                                        <button type="submit" class="btn btn-primary"
+                                            style="margin-top: 30px;margin-bottom: 30px; width: 120px;">
+                                            Enviar
+                                        </button>
+                                    </div>
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="respuestaServer">Respuesta Servidor:</label>
+                                        <input type="text" class="form-control" style="width: 400px;height: 100px;"
+                                            id="respuesta" name="respuesta" value="{{ .mensaje }}" readonly>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <div id="BuscarImagenes" style="width: 800px;margin-top: 5%;margin-bottom: 10px">
+                        <form action="/api/images" method="get" style="width: 800px;margin-top: 50px;">
+
+                            <h4 class="centre-tittle">Buscar Imagenes</h4>
+                            <div style="display: flex;">
+
+                                <div style="width: 1000px; margin-right: auto;">
+
+                                    <div class="form-group"
+                                        style="margin-left: 200px;margin-top: 30px;margin-bottom: 30px">
+                                        <label for="maquina_virtuales">IP Maquina Virtual</label>
+                                        <select class="form-control" style="width: 400px;" id="buscarMV"
+                                            name="buscarMV">
+                                            <option value="0" disabled selected> Selecione Su Maquina Virtual</option>
+                                            {{range .machines}}
+                                            <option>{{.Ip}} - {{.Hostname}}</option>
+                                            {{end}}
+                                        </select>
+                                    </div>
+
+                                    <div class="centrar-botones">
+                                        <button id="buscarBtn" type="submit" class="btn btn-primary"
+                                            style="margin-top: 30px;margin-bottom: 30px; width: 120px;">
+                                            Buscar
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+                <div class="table" style="width: 1000px;margin-left: 50px;">
+                    <table id="imagen-table">
+                        <thead>
+                            <tr>
+                                <th>Repositorio</th>
+                                <th>Tag</th>
+                                <th>Tamaño</th>
+                                <th>Control</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script>
+
+            function showDiv(select) {
+                if (select.value == 1) {
+
+                    document.getElementById('DockerHub').style.display = "block";
+                    document.getElementById('archivoTar').style.display = "none";
+                    document.getElementById('DockerFile').style.display = "none";
+
+                } else if (select.value == 2) {
+
+                    document.getElementById('archivoTar').style.display = "block";
+                    document.getElementById('DockerHub').style.display = "none";
+                    document.getElementById('DockerFile').style.display = "none";
+
+                } else if (select.value == 3) {
+
+                    document.getElementById('DockerFile').style.display = "block";
+                    document.getElementById('DockerHub').style.display = "none";
+                    document.getElementById('archivoTar').style.display = "none";
+
+                } else {
+
+                    document.getElementById('DockerHub').style.display = "none";
+                    document.getElementById('archivoTar').style.display = "none";
+                    document.getElementById('DockerFile').style.display = "none";
+
+                }
+            } 
+        </script>
+
+</body>
+
+</html>

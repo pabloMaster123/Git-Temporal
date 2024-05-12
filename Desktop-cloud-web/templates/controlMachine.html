@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página principal</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/styleControlMachine.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/scriptjs/controleMachineScripts.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body style="background-color: #d9d9d9ff;">
+    
+    <div class="container">
+        <!-- Div para la alerta centrada -->
+        <div id="alert-container">
+            <div id="alert-message" class="alert" role="alert">
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h1 style="font-family: 'Arial', sans-serif; color: #333;">TUS MÁQUINAS VIRTUALES</h1>
+            </div>
+            <div class="centrar-botones">
+                <button onclick="abrirVentanaEmergente()" type="button" class="btn btn-primary" style="margin-top: 10px; font-family: 'Arial', sans-serif; background-color: #337ab7; border-color: #2e6da4;">
+                    Crear Máquina Virtual
+                    <img src="/static/images/icons/add.png" alt="Icono" style="width: 16px; height: 16px; margin-left: 5px;">
+                </button>
+            </div>
+        </div>
+        <div class="table">
+            <table id="machine-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>IP</th>
+                        <th>Distribución</th>
+                        <th>Estado</th>
+                        <th>Control</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--VENTANAS EMERGENTES OCULTAS-->
+    <div id="ventanaEmergente" class="ventana-emergente">
+        <button type="button" class="btn-close" aria-label="Cerrar ventana" onclick="cerrarVentanaEmergente()"></button>
+        <form method="post" action="/api/createMachine">
+            <h2 class="centre-tittle">CREAR MÁQUINA VIRTUAL</h2>
+            <div class="form-group" style="margin-top: 30px;">
+                <label for="vmnameCreate">Nombre de la máquina:</label>
+                <input type="text" class="form-control" name="vmnameCreate" id="vmnameCreate" required>
+            </div>
+            <div class="form-group">
+                <label for="osCreate">Distribución</label>
+                <select class="form-control" id="osCreate" name="osCreate" required>
+                    <option value="Debian">Debian</option>
+                    <option value="Mint">Linux Mint</option>
+                    <option value="Ubuntu">Ubuntu</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="memoryCreate">Cantidad de Memoria</label>
+                <select class="form-control" id="memoryCreate" name="memoryCreate" required>
+                    <option value="1024">1 GB</option>
+                    <option value="2048">2 GB</option>
+                    <option value="3072">3 GB</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cpuCreate">Cantidad de CPU</label>
+                <select class="form-control" id="cpuCreate" name="cpuCreate" required>
+                    <option value="2">2 Núcleos</option>
+                    <option value="3">3 Núcleos</option>
+                    <option value="4">4 Núcleos</option>
+                </select>
+            </div>
+            <div class="centrar-botones">
+                <button type="submit" id="MainSend" class="btn btn-primary">Crear Máquina Virtual</button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="VentanaEmergenteConfiguracion" class="ventana-emergente">
+        <button type="button" class="btn-close" aria-label="Cerrar ventana" onclick="cerrarVentanaEmergenteConfiguracion()"></button>
+        
+        <form method="post" action="/configMachine">
+            <h2 class="centre-tittle">CONFIGURAR MÁQUINA VIRTUAL</h2>
+
+            <div class="form-group" style="position: relative; margin-top: 30px;">
+                <label for="vmnameConfig">Nombre de la máquina</label>
+                <div style="position: relative;">
+                    <input type="text" class="form-control" id="vmnameConfig" name="vmnameConfig" required readonly style="background-color: #f2f2f2; cursor: not-allowed;">
+                    <div style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">
+                        <img src="/static/images/icons/candado.png" alt="Candado" style="width: 16px; height: 16px;">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="position: relative;">
+                <label for="os">Distribución</label>
+                <div style="position: relative;">
+                    <input type="text" class="form-control" id="osConfig" name="osConfig" required disabled style="background-color: #f2f2f2; cursor: not-allowed;">
+                    <div style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">
+                        <img src="/static/images/icons/candado.png" alt="Candado" style="width: 16px; height: 16px;">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="memory">Cantidad de Memoria</label>
+                <select class="form-control" id="memoryConfig" name="memoryConfig" required>
+                    <option value="1024">1 GB</option>
+                    <option value="2048">2 GB</option>
+                    <option value="3072">3 GB</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cpuConfig">Cantidad de CPU</label>
+                <select class="form-control" id="cpuConfig" name="cpuConfig" required>
+                    <option value="2">2 Núcleos</option>
+                    <option value="3">3 Núcleos</option>
+                    <option value="4">4 Núcleos</option>
+                </select>
+            </div>
+            <div class="centrar-botones">
+                <button type="submit" id="ConfigMachine" class="btn btn-primary">Actualizar Máquina Virtual</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="VentanaEmergenteEliminacion" class="ventana-emergente">
+        <button type="button" class="btn-close" aria-label="Cerrar ventana" onclick="cerrarVentanaEmergenteEliminar()"></button>
+        
+        <form method="post" action="/deleteMachine">
+            <h2 class="centre-tittle">CONFIRMACIÓN DE ELIMINACIÓN</h2>
+            <div class="form-group" style="text-align: center;">
+                <label for="vmnameCreate">¿Está seguro que desea eliminar la máquina virtual?</label>
+                <div style="text-align: center;">
+                    <input type="text" class="form-control" id="vmnameDelete" name="vmnameDelete" required readonly style="background-color: #f2f2f2; width: 100%;cursor: not-allowed; text-align: center; margin-top: 20px;">
+                </div>
+            </div>
+            
+            <div class="centrar-botones" style="margin-top: 20px;">
+                <button type="submit" id="DeleteMachine" style="background-color: rgba(255, 0, 0, 0.687); width: 100px; margin-right: 10px;" class="btn btn-Succes">ELIMINAR</button>
+                <button type="button" onclick="cerrarVentanaEmergenteEliminar()" style="background-color: rgba(0, 128, 0, 0.723); width: 100px; margin-left: 10px;" class="btn btn-Succes">CANCELAR</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="VentanaEmergenteInformacion" class="ventana-emergente">
+        <button type="button" class="btn-close" aria-label="Cerrar ventana" onclick="cerrarVentanaEmergenteInformacion()"></button>
+        
+        <form action="">
+            <h1 class="centre-tittle">INFORMACIÓN DE LA MÁQUINA</h1>
+            <ul style="margin-top: 30px;">
+                <li>
+                    <strong>Nombre:</strong>
+                    <span id="nombreSpan"></span>
+                </li>
+                <li>
+                    <strong>Sistema Operativo:</strong>
+                    <span id="sistemaOperativoSpan"></span>
+                </li>
+                <li>
+                    <strong>Distribución:</strong>
+                    <span id="distribucionSpan"></span>
+                </li>
+                <li>
+                    <strong>CPU:</strong>
+                    <span id="cpuSpan"></span>
+                </li>
+                <li>
+                    <strong>Memoria:</strong>
+                    <span id="memoriaSpan"></span>
+                </li>
+                <li>
+                    <strong>Estado:</strong>
+                    <span id="estadoSpan"></span>
+                </li>
+                <li>
+                    <strong>IP:</strong>
+                    <span id="ipSpan"></span>
+                </li>
+                <li>
+                    <strong>Hostname:</strong>
+                    <span id="hostnameSpan"></span>
+                </li>
+                <li>
+                    <strong>Contraseña:</strong>
+                    <span id="passwordSpan"></span>
+                </li>
+                <li>
+                    <strong>Url de Conexión:</strong>
+                    <span id="urlSpan"></span>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <script>
+        function showAlert(message, alertType) {
+            var alertBox = document.getElementById("alert-message");
+            alertBox.innerText = message;
+            alertBox.className = "alert alert-" + alertType;
+            var alertContainer = document.getElementById("alert-container");
+            alertContainer.style.display = "block";
+    
+            // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function () {
+                alertContainer.style.display = "none";
+            }, 5000);
+        }
+    
+        var successMessage = "{{ .SuccessMessage }}";
+        if (successMessage !== "") {
+            showAlert(successMessage, "success");
+        }
+    
+        var errorMessage = "{{ .ErrorMessage }}";
+        if (errorMessage !== "") {
+            showAlert(errorMessage, "danger");
+        }
+    </script>
+</body>
+</html>

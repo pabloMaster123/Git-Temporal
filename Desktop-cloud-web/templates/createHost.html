@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crear Hosts</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/styleNavbar.css">
+
+</head>
+
+<body style="height: 100vh;">
+    <div style="height: 80vh;">
+        <div class="container">
+            <div class="center-content">
+                <form method="post" action="/createHost" style="margin: 50px; width: 120vh;">
+                    <h2 class="centre-tittle">Crear Host</h2>
+                    <div style="display: flex;">
+                        <div style="width: 1000px; margin-right: 10px;">
+                            <div class="form-group">
+                                <label for="nameHost">Apodo del Host:</label>
+                                <input type="text" class="form-control" id="nameHost" name="nameHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ipHost">IP del Host:</label>
+                                <input type="text" class="form-control" id="ipHost" name="ipHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="macHost">MAC del Host:</label>
+                                <input type="text" class="form-control" id="macHost" name="macHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="adapHost">Adaptador Red del Host:</label>
+                                <input type="text" class="form-control" id="adapHost" name="adapHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="soHost">Sistema Operativo del Host:</label>
+                                <input type="text" class="form-control" id="soHost" name="soHost" required>
+                            </div>
+                        </div>
+                        <div style="width: 1000px; margin-left: 10px;">
+                            <div class="form-group">
+                                <label for="hostnameHost">Username:</label>
+                                <input type="text" class="form-control" id="hostnameHost" name="hostnameHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ramHost">RAM Total del Host (MB):</label>
+                                <input type="number" class="form-control" id="ramHost" name="ramHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cpuHost">CPU Total del Host:</label>
+                                <input type="number" class="form-control" id="cpuHost" name="cpuHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="almaceHost">Almacenamiento Total del Host:</label>
+                                <input type="number" class="form-control" id="almaceHost" name="almaceHost" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sshHost">Ruta de la Llave SSH Host:</label>
+                                <input type="text" class="form-control" id="sshHost" name="sshHost" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="centrar-botones">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 30px; width: 120px;">Crear Host</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

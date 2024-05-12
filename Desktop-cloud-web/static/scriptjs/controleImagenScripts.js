@@ -1,6 +1,6 @@
 function actualizarTabla() {
     $.ajax({
-        url: "/api/images",
+        url: "/api/imagenes",
         method: "GET", // Cambiado a método GET
         dataType: "json",
         success: function(data) {

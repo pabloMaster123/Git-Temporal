@@ -516,11 +516,11 @@ func GetImages(c *gin.Context) {
 	}
 
 	// Si se proporciona un valor, procede con ObtenerImagenesC
-	imagenes, err := ObtenerImagenesC(maquinaVirtual)
+	images, err := ObtenerImagenesC(maquinaVirtual)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, imagenes)
+	c.JSON(http.StatusOK, images)
 }

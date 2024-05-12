@@ -60,7 +60,7 @@ func main() {
 
 	r.GET("/scrollmenu", handlers.Scrollmenu)
 	r.GET("/api/machines", handlers.GetMachines)
-	r.GET("/api/images", handlers.GetImages)
+	r.GET("/api/imagenes", handlers.GetImages)
 	r.GET("/controlMachine", handlers.ControlMachine)
 	r.GET("actualizaciones-maquinas", handlers.ActualizacionesMaquinas)
 

@@ -8,13 +8,13 @@ function actualizarTabla() {
                 // Limpia la tabla actual
                 $("#imagen-table tbody").empty();
                 // Itera a través de los datos y agrega filas a la tabla
-                data.forEach(function(imagenes) {
+                data.forEach(function(image) {
                     var backgroundColor = "#93c47dff"; // Verde
                     $("#imagen-table tbody").append(
                         `<tr style="background-color: ${backgroundColor}">
-                            <td>${imagenes.Repositorio}</td>
-                            <td>${imagenes.Tag}</td>
-                            <td>${imagenes.Tamanio}</td>
+                            <td>${image.Repositorio}</td>
+                            <td>${image.Tag}</td>
+                            <td>${image.Tamanio}</td>
                         </tr>`
                     );
                 });
